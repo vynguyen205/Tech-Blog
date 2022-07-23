@@ -1,0 +1,12 @@
+-----homepage-----
+
+- shows all the posts
+
+
+----dashboard----
+
+- you can post here
+
+----login----
+
+- log in page

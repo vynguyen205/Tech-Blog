@@ -13,6 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const sess = {
+  //this is to hash the session
   secret: 'Super secret secret',
   cookie: {},
   resave: false,
