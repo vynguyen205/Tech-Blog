@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+//find all users
 router.get('/', async (req, res) => {
   try {
     const userData = await User.findAll();
@@ -10,6 +11,17 @@ router.get('/', async (req, res) => {
   }
 })
 
+//find one user
+router.get('/:id', async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id);
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+//create a new user
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -25,9 +37,24 @@ router.post('/', async (req, res) => {
   }
 });
 
+//update a user
+router.put('/:id', async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id);
+    const updatedUserData = await userData.update(req.body);
+
+    res.status(200).json(updatedUserData);
+
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+//log in route
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    const { username, password } = req.body;
+    const userData = await User.findOne({ where: { username } });
 
     if (!userData) {
       res
@@ -36,7 +63,7 @@ router.post('/login', async (req, res) => {
       return;
       
     }
-    const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = userData.checkPassword(password);
 
     if (!validPassword) {
       res
@@ -57,6 +84,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
+//log out route
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {

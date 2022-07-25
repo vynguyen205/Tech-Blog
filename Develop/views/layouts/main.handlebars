@@ -14,14 +14,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel='stylesheet' href='/css/style.css' />
-    <title>Bloggy</title>
+    <title>`Bloggy`</title>
     <body>
           <header>
             <nav class="navbar" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
-                  {{!-- change this --}}
-                  <a class="navbar-item" href="https://bulma.io">
-                    <h1 class="has-text-weight-bold">`Bloggy`</h1>
+                  {{!-- change this href --}}
+                  <a class="navbar-item" href="">
+                    <h1 class="has-text-weight-normal is-italic">`Bloggy`</h1>
                   </a>
 
                   <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -64,10 +64,10 @@
                 <div class="navbar-end">
                   <div class="navbar-item">
                     <div class="buttons">
-                      <a class="button is-primary is-rounded">
-                        <strong>Sign up</strong>
+                      <a class="button has-background-grey-lighter is-rounded is-focused">
+                        <strong class="has-text-dark">Sign up</strong>
                       </a>
-                      <a class="button is-light is-rounded">
+                      <a class="button is-light is-rounded is-focused">
                         Log in
                       </a>
                     </div>
@@ -78,9 +78,8 @@
           </header>
         <section>
           <div class="container">
-            {{!-- <h1 class="is-size-1 has-text-centered has-text-weight-bold"> Welcome to `Bloggy`</h1> --}}
-          </div>
           {{{body}}}
+          </div>
         </section>
       </section>
 
