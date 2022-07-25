@@ -2,6 +2,12 @@
 
 - shows all the posts
 
+- nav links
+    - dashboard
+    - log in
+
+- 
+
 
 ----dashboard----
 
@@ -10,3 +16,5 @@
 ----login----
 
 - log in page
+
+- sign up
