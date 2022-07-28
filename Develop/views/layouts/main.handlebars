@@ -20,24 +20,24 @@
             <nav class="navbar" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
                   {{!-- change this href --}}
-                  <a class="navbar-item" href="">
+                  <a class="navbar-item" href="/">
                     <h1 class="has-text-weight-normal is-italic">`Bloggy`</h1>
                   </a>
 
-                  <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                  <a role="button" id="burger" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                   </a>
                 </div>
 
-              <div id="navbarBasicExample" class="navbar-menu">
+              <div id="nav-links" class="navbar-menu">
                 <div class="navbar-start">
-                  <a class="navbar-item">
+                  <a class="navbar-item" href="/">
                     Home
                   </a>
                   {{!-- add href here --}}
-                  <a class="navbar-item" >
+                  <a class="navbar-item" href="/dashboard">
                     Dashboard
                   </a>
 
@@ -63,13 +63,14 @@
 
                 <div class="navbar-end">
                   <div class="navbar-item">
-                    <div class="buttons">
-                      <a class="button has-background-grey-lighter is-rounded is-focused">
+                    <a class="has-text-dark mr-6" href="/login">My Account</a>
+                    {{!-- <div class="buttons">
+                      <a class="button is-rounded is-ghost" href="/signup">
                         <strong class="has-text-dark">Sign up</strong>
                       </a>
-                      <a class="button is-light is-rounded is-focused">
+                      <a class="button is-light is-rounded is-focused" href="/login">
                         Log in
-                      </a>
+                      </a> --}}
                     </div>
                   </div>
                 </div>
@@ -77,12 +78,13 @@
             </nav>
           </header>
         <section>
-          <div class="container">
+
           {{{body}}}
-          </div>
+          
         </section>
       </section>
 
+    <script src="/js/toggle.js"></script>
   </body>
 
 </html>
