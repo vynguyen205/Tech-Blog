@@ -1,8 +1,17 @@
-import EditorJS from '@editorjs/editorjs';
+const { Editor }  = require('@tiptap/core')
+const StarterKit = require('@tiptap/starter-kit')
 
+let editor = new Editor({
+  element: document.querySelector('.element'),
+  extensions: [
+    StarterKit,
+  ],
+  content: '<p>Hello World!</p>',
+})
 
-const editor = new EditorJS();
-
+document.querySelector('#bold').addEventListener('click', () => {
+  editor.chain().focus().toggleBold().run()
+})
 
 
 // function toggle(bold) {
