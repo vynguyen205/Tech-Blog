@@ -4275,7 +4275,7 @@ exports.textblockTypeInputRule = textblockTypeInputRule;
 exports.wrappingInputRule = wrappingInputRule;
 
 
-},{"prosemirror-commands":22,"prosemirror-keymap":26,"prosemirror-model":27,"prosemirror-schema-list":28,"prosemirror-state":29,"prosemirror-transform":30,"prosemirror-view":31}],2:[function(require,module,exports){
+},{"prosemirror-commands":23,"prosemirror-keymap":27,"prosemirror-model":28,"prosemirror-schema-list":29,"prosemirror-state":30,"prosemirror-transform":31,"prosemirror-view":32}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -4694,7 +4694,7 @@ exports["default"] = CodeBlock;
 exports.tildeInputRegex = tildeInputRegex;
 
 
-},{"@tiptap/core":1,"prosemirror-state":29}],6:[function(require,module,exports){
+},{"@tiptap/core":1,"prosemirror-state":30}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -4807,7 +4807,7 @@ exports.Dropcursor = Dropcursor;
 exports["default"] = Dropcursor;
 
 
-},{"@tiptap/core":1,"prosemirror-dropcursor":23}],9:[function(require,module,exports){
+},{"@tiptap/core":1,"prosemirror-dropcursor":24}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -4839,7 +4839,7 @@ exports.Gapcursor = Gapcursor;
 exports["default"] = Gapcursor;
 
 
-},{"@tiptap/core":1,"prosemirror-gapcursor":24}],10:[function(require,module,exports){
+},{"@tiptap/core":1,"prosemirror-gapcursor":25}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -5038,7 +5038,7 @@ exports.History = History;
 exports["default"] = History;
 
 
-},{"@tiptap/core":1,"prosemirror-history":25}],13:[function(require,module,exports){
+},{"@tiptap/core":1,"prosemirror-history":26}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -5106,7 +5106,7 @@ exports.HorizontalRule = HorizontalRule;
 exports["default"] = HorizontalRule;
 
 
-},{"@tiptap/core":1,"prosemirror-state":29}],14:[function(require,module,exports){
+},{"@tiptap/core":1,"prosemirror-state":30}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -5436,6 +5436,68 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var core = require('@tiptap/core');
 
+const TextAlign = core.Extension.create({
+    name: 'textAlign',
+    addOptions() {
+        return {
+            types: [],
+            alignments: ['left', 'center', 'right', 'justify'],
+            defaultAlignment: 'left',
+        };
+    },
+    addGlobalAttributes() {
+        return [
+            {
+                types: this.options.types,
+                attributes: {
+                    textAlign: {
+                        default: this.options.defaultAlignment,
+                        parseHTML: element => element.style.textAlign || this.options.defaultAlignment,
+                        renderHTML: attributes => {
+                            if (attributes.textAlign === this.options.defaultAlignment) {
+                                return {};
+                            }
+                            return { style: `text-align: ${attributes.textAlign}` };
+                        },
+                    },
+                },
+            },
+        ];
+    },
+    addCommands() {
+        return {
+            setTextAlign: (alignment) => ({ commands }) => {
+                if (!this.options.alignments.includes(alignment)) {
+                    return false;
+                }
+                return this.options.types.every(type => commands.updateAttributes(type, { textAlign: alignment }));
+            },
+            unsetTextAlign: () => ({ commands }) => {
+                return this.options.types.every(type => commands.resetAttributes(type, 'textAlign'));
+            },
+        };
+    },
+    addKeyboardShortcuts() {
+        return {
+            'Mod-Shift-l': () => this.editor.commands.setTextAlign('left'),
+            'Mod-Shift-e': () => this.editor.commands.setTextAlign('center'),
+            'Mod-Shift-r': () => this.editor.commands.setTextAlign('right'),
+            'Mod-Shift-j': () => this.editor.commands.setTextAlign('justify'),
+        };
+    },
+});
+
+exports.TextAlign = TextAlign;
+exports["default"] = TextAlign;
+
+
+},{"@tiptap/core":1}],20:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var core = require('@tiptap/core');
+
 const Text = core.Node.create({
     name: 'text',
     group: 'inline',
@@ -5445,7 +5507,7 @@ exports.Text = Text;
 exports["default"] = Text;
 
 
-},{"@tiptap/core":1}],20:[function(require,module,exports){
+},{"@tiptap/core":1}],21:[function(require,module,exports){
 'use strict';
 
 var core = require('@tiptap/core');
@@ -5555,7 +5617,7 @@ const StarterKit = core.Extension.create({
 module.exports = StarterKit;
 
 
-},{"@tiptap/core":1,"@tiptap/extension-blockquote":2,"@tiptap/extension-bold":3,"@tiptap/extension-bullet-list":4,"@tiptap/extension-code":6,"@tiptap/extension-code-block":5,"@tiptap/extension-document":7,"@tiptap/extension-dropcursor":8,"@tiptap/extension-gapcursor":9,"@tiptap/extension-hard-break":10,"@tiptap/extension-heading":11,"@tiptap/extension-history":12,"@tiptap/extension-horizontal-rule":13,"@tiptap/extension-italic":14,"@tiptap/extension-list-item":15,"@tiptap/extension-ordered-list":16,"@tiptap/extension-paragraph":17,"@tiptap/extension-strike":18,"@tiptap/extension-text":19}],21:[function(require,module,exports){
+},{"@tiptap/core":1,"@tiptap/extension-blockquote":2,"@tiptap/extension-bold":3,"@tiptap/extension-bullet-list":4,"@tiptap/extension-code":6,"@tiptap/extension-code-block":5,"@tiptap/extension-document":7,"@tiptap/extension-dropcursor":8,"@tiptap/extension-gapcursor":9,"@tiptap/extension-hard-break":10,"@tiptap/extension-heading":11,"@tiptap/extension-history":12,"@tiptap/extension-horizontal-rule":13,"@tiptap/extension-italic":14,"@tiptap/extension-list-item":15,"@tiptap/extension-ordered-list":16,"@tiptap/extension-paragraph":17,"@tiptap/extension-strike":18,"@tiptap/extension-text":20}],22:[function(require,module,exports){
 'use strict';
 
 // ::- Persistent data structure representing an ordered mapping from
@@ -5688,7 +5750,7 @@ OrderedMap.from = function(value) {
 
 module.exports = OrderedMap;
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -6400,7 +6462,7 @@ exports.splitBlockKeepMarks = splitBlockKeepMarks;
 exports.toggleMark = toggleMark;
 exports.wrapIn = wrapIn;
 
-},{"prosemirror-model":27,"prosemirror-state":29,"prosemirror-transform":30}],23:[function(require,module,exports){
+},{"prosemirror-model":28,"prosemirror-state":30,"prosemirror-transform":31}],24:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -6597,7 +6659,7 @@ var DropCursorView = function () {
 
 exports.dropCursor = dropCursor;
 
-},{"prosemirror-state":29,"prosemirror-transform":30}],24:[function(require,module,exports){
+},{"prosemirror-state":30,"prosemirror-transform":31}],25:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -6894,7 +6956,7 @@ function drawGapCursor(state) {
 exports.GapCursor = GapCursor;
 exports.gapCursor = gapCursor;
 
-},{"prosemirror-keymap":26,"prosemirror-model":27,"prosemirror-state":29,"prosemirror-view":31}],25:[function(require,module,exports){
+},{"prosemirror-keymap":27,"prosemirror-model":28,"prosemirror-state":30,"prosemirror-view":32}],26:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7347,7 +7409,7 @@ exports.redoDepth = redoDepth;
 exports.undo = undo;
 exports.undoDepth = undoDepth;
 
-},{"prosemirror-state":29,"prosemirror-transform":30,"rope-sequence":32}],26:[function(require,module,exports){
+},{"prosemirror-state":30,"prosemirror-transform":31,"rope-sequence":33}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -7430,7 +7492,7 @@ function keydownHandler(bindings) {
 exports.keydownHandler = keydownHandler;
 exports.keymap = keymap;
 
-},{"prosemirror-state":29,"w3c-keyname":33}],27:[function(require,module,exports){
+},{"prosemirror-state":30,"w3c-keyname":34}],28:[function(require,module,exports){
 'use strict';
 
 function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
@@ -10767,7 +10829,7 @@ exports.ResolvedPos = ResolvedPos;
 exports.Schema = Schema;
 exports.Slice = Slice;
 
-},{"orderedmap":21}],28:[function(require,module,exports){
+},{"orderedmap":22}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -11048,7 +11110,7 @@ exports.sinkListItem = sinkListItem;
 exports.splitListItem = splitListItem;
 exports.wrapInList = wrapInList;
 
-},{"prosemirror-model":27,"prosemirror-state":29,"prosemirror-transform":30}],29:[function(require,module,exports){
+},{"prosemirror-model":28,"prosemirror-state":30,"prosemirror-transform":31}],30:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -12084,7 +12146,7 @@ exports.SelectionRange = SelectionRange;
 exports.TextSelection = TextSelection;
 exports.Transaction = Transaction;
 
-},{"prosemirror-model":27,"prosemirror-transform":30}],30:[function(require,module,exports){
+},{"prosemirror-model":28,"prosemirror-transform":31}],31:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -13897,7 +13959,7 @@ exports.joinPoint = joinPoint;
 exports.liftTarget = liftTarget;
 exports.replaceStep = replaceStep;
 
-},{"prosemirror-model":27}],31:[function(require,module,exports){
+},{"prosemirror-model":28}],32:[function(require,module,exports){
 'use strict';
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -19637,7 +19699,7 @@ exports.__endComposition = __endComposition;
 exports.__parseFromClipboard = __parseFromClipboard;
 exports.__serializeForClipboard = __serializeForClipboard;
 
-},{"prosemirror-model":27,"prosemirror-state":29,"prosemirror-transform":30}],32:[function(require,module,exports){
+},{"prosemirror-model":28,"prosemirror-state":30,"prosemirror-transform":31}],33:[function(require,module,exports){
 'use strict';
 
 var GOOD_LEAF_SIZE = 200;
@@ -19850,7 +19912,7 @@ var ropeSequence = RopeSequence;
 
 module.exports = ropeSequence;
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -19981,14 +20043,17 @@ exports.base = base;
 exports.keyName = keyName;
 exports.shift = shift;
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 const { Editor }  = require('@tiptap/core')
 const StarterKit = require('@tiptap/starter-kit')
+const TextAlign = require('@tiptap/extension-text-align')
 
 let editor = new Editor({
   element: document.querySelector('.element'),
   extensions: [
     StarterKit,
+    TextAlign
+    
   ],
   content: '<p>Hello World!</p>',
 })
@@ -19997,55 +20062,24 @@ document.querySelector('#bold').addEventListener('click', () => {
   editor.chain().focus().toggleBold().run()
 })
 
+document.querySelector('#italic').addEventListener('click', () => {
+  editor.chain().focus().toggleItalic().run()
+})
 
-// function toggle(bold) {
-// 	//function to make the text bold using DOM method
-//     if (document.getElementById("1").value === "ON") {
-//         document.getElementById("textarea1").style.fontWeight = "bold";
-//     } else {
-//         document.getElementById("textarea1").style.fontWeight = "normal";
-//     }
+document.querySelector('#underline').addEventListener('click', () => {
+  editor.chain().focus().toggleBulletList().run()
+})
+document.querySelector('#code').addEventListener('click', () => {
+  editor.chain().focus().toggleCode().run()
+})
+document.querySelector('#aLeft').addEventListener('click', () => {
+  editor.chain().focus().setTextAlign('left').run()
+})
+document.querySelector('#aCenter').addEventListener('click', () => {
+  editor.commands.setTextAlign('center')
+})
+document.querySelector('#aRight').addEventListener('click', () => {
+  editor.commands.setTextAlign('right')
+})
 
-// }
-
-// function italic() {
-// 	//function to make the text italic using DOM method
-// 	document.getElementById("textarea1").style.fontStyle = "italic";
-// }
-
-// function underline() {
-// 	//function to make the text underline left using DOM method
-// 	document.getElementById("textarea1").style.textDecoration = "underline";
-
-// }
-// function heading() {
-//     //function to make the text in Heading using DOM method
-//     document.getElementById("textarea1").style.fontSize= "xx-large";
-// }
-
-// function leftA() {
-//     //function to make the text alignment left using DOM method
-// 	document.getElementById("textarea1").style.textAlign = "left";
-// }
-
-// function centerA() {
-// 	//function to make the text alignment center using DOM method
-// 	document.getElementById("textarea1").style.textAlign = "center";
-// }
-
-// function rightA() {
-// 	//function to make the text align right using DOM method
-// 	document.getElementById("textarea1").style.textAlign = "right";
-// }
-
-// function clearSet() {
-// 	//function to make the text back to normal by removing all the methods applied
-// 	//using DOM method
-// 	document.getElementById("textarea1").style.fontWeight = "normal";
-// 	document.getElementById("textarea1").style.textAlign = "left";
-// 	document.getElementById("textarea1").style.fontStyle = "normal";
-// 	document.getElementById("textarea1").style.textTransform = "lowercase";
-// 	// document.getElementById("textarea1").value = " ";
-// }
-
-},{"@tiptap/core":1,"@tiptap/starter-kit":20}]},{},[34]);
+},{"@tiptap/core":1,"@tiptap/extension-text-align":19,"@tiptap/starter-kit":21}]},{},[35]);

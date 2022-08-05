@@ -1,52 +1,67 @@
 <section class="hero is-full-height">
     <div class="columns">
         <aside class=" column is-2 menu m-5">
-            <p class="title is-size-5 greeting">
-            Good morning, Vy!
+            <p class="title is-size-5" id="greeting">
+            {{!-- Good morning, {{ username }} --}}
             </p>
-            <p class="subtitle is-size-6 date">
-            July 1, 2022 8:30 AM
+            <p class="subtitle is-size-6" id="date-time">
+            
             </p>
 
             <p class="menu-label">
                 General
             </p>
             <ul class="menu-list">
-                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/dashboard/">Dashboard</a></li>
                 <li><a href="/dashboard/write">New Post</a></li>
                 <li><a href="#">Drafts</a></li>
             </ul>
         </aside>
-        <main>
-            <div class="card mt-6">
-                <div class="card-image">
-                    <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                    </figure>
-                </div>
-                <div class="card-content">
-                    <div class="media">
-                    <div class="media-left">
-                        <figure class="image is-48x48">
-                        <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <p class="title is-4">John Smith</p>
-                        <p class="subtitle is-6">@johnsmith</p>
-                    </div>
-                    </div>
-
-                    <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                    <a href="#">#css</a> <a href="#">#responsive</a>
-                    <br>
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+        <div class="container mt-6">
+            <div class="box">
+                <div class="level">
+                    <div class="level-item has-text-centered">
+                        <div>
+                        <p class="heading">Posts</p>
+                        <p class="title">3,456</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </main>
+            <div class="box">
+                <div class="level">
+                    <div class="level-item has-text-centered">
+                        <div>
+                        <p class="heading">Following</p>
+                        <p class="title">123</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="level">
+                    <div class="level-item has-text-centered">
+                        <div>
+                        <p class="heading">Followers</p>
+                        <p class="title">456K</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="level">
+                    <div class="level-item has-text-centered">
+                        <div>
+                        <p class="heading">Likes</p>
+                        <p class="title">789</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
     </div>
 </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="/js/dashboard.js"></script>
 

@@ -22,12 +22,14 @@ router.get('/:id', async (req, res) => {
 });
 
 //create a new user
-router.post('/', async (req, res) => {
+router.post('/signup', async (req, res) => {
   try {
     const userData = await User.create(req.body);
 
     req.session.save(() => {
+      // save the user's id in the session
       req.session.user_id = userData.id;
+      // this is where you would let session know that you are logged in
       req.session.logged_in = true;
 
       res.status(200).json(userData);
@@ -68,7 +70,8 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+        .json({ message: 'Incorrect email or password, please try again', success: false });
+
       return;
     }
 
@@ -76,7 +79,7 @@ router.post('/login', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
       
-      res.json({ user: userData, message: 'You are now logged in!' });
+      res.json({ user: userData, message: 'You are now logged in!', success: true });
     });
 
   } catch (err) {

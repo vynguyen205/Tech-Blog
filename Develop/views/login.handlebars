@@ -7,6 +7,7 @@
     <p class='control has-icons-right'>
       <input
         class='input is-rounded'
+        id = 'login_username'
         type='username'
         placeholder='johndoe123'
       />
@@ -18,7 +19,11 @@
   <div class='card-content'>
     <label class='label has-text-weight-light'>Password</label>
     <p class='control mb-3'>
-      <input class='input is-rounded' type='password' placeholder='Password' />
+      <input 
+      class='input is-rounded'
+      id = 'login_password' 
+      type='password' 
+      placeholder='Password' />
     </p>
   </div>
   <p class='has-text-grey-light has-text-centered mt-3'>Don't have an account?<a
@@ -27,9 +32,9 @@
     > Sign up</a></p>
   <div class='field is-grouped is-grouped-centered'>
     <p class='control mt-6'>
-      <a class='button is-black has-text-weight-light is-rounded'>
+      <button class='button is-black has-text-weight-light is-rounded' id="login-btn">
         Log In
-      </a>
+      </button>
     </p>
   </div>
 </form>

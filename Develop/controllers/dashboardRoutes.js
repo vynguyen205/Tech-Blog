@@ -7,10 +7,10 @@ const { User, Post, Comment } = require('../models');
 //     res.redirect('/login');
 // })
 
-router.get('/', /* isAuth, */ async (req, res) => {
+router.get('/:username', isAuth, async (req, res) => {
   try {
     const userData = await User.findOne({
-      where: { id: req.session.user_id || 1},
+      where: { id: req.session.user_id },
       include: {
         model: Post,
         include: {
@@ -20,9 +20,9 @@ router.get('/', /* isAuth, */ async (req, res) => {
     });
     //this will only show the plain data of the user, not all of the meta data
     const data = userData.get({ plain: true });
-
-    console.log(userData);
-    res.render('dashboard', { data });
+    
+    console.log(`!!!!DashboardRoutes Request: `,userData);
+    res.render('dashboard', { data, logged_in: req.session.logged_in });
 
   } catch (err) {
     console.log(err);
