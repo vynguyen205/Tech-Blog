@@ -3,9 +3,16 @@ const isAuth = require('../utils/auth');
 const { User, Post, Comment } = require('../models');
 
 // ig user is not logged in, redirect to login
-// router.get('/', (req, res) => {
-//     res.redirect('/login');
-// })
+router.get('/', (req, res) => {
+  // if the user logged in, redirect to dashboard. Otherwise, redirect to login.
+  if (req.session.user_id) {
+    console.log(`getting info`, req.session)
+    res.redirect(`/dashboard/`);
+  } else {
+    res.redirect('/login');
+  }
+  
+})
 
 router.get('/:username', isAuth, async (req, res) => {
   try {

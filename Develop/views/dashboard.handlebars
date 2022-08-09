@@ -17,49 +17,75 @@
                 <li><a href="#">Drafts</a></li>
             </ul>
         </aside>
-        <div class="container mt-6">
-            <div class="box">
-                <div class="level">
+        <div class="column">
+            <div class="container mt-6">
+                <nav class="level">
                     <div class="level-item has-text-centered">
                         <div>
                         <p class="heading">Posts</p>
                         <p class="title">3,456</p>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="level">
                     <div class="level-item has-text-centered">
                         <div>
                         <p class="heading">Following</p>
                         <p class="title">123</p>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="level">
                     <div class="level-item has-text-centered">
                         <div>
                         <p class="heading">Followers</p>
                         <p class="title">456K</p>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="level">
                     <div class="level-item has-text-centered">
                         <div>
                         <p class="heading">Likes</p>
                         <p class="title">789</p>
                         </div>
                     </div>
+                </nav>
+            </div>
+            <div class="tabs is-right mt-5 mr-6">
+                <ul>
+                    <li class="is-active"><a>All Posts</a></li>
+                    <li><a>Recent Posts</a></li>
+                </ul>
+            </div>
+
+            <div class="columns">
+                <div class="column">
+                   <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">
+                            Component
+                            </p>
+                            <button class="card-header-icon" aria-label="more options">
+                            <span class="icon">
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                            </button>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+                            <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+                            <br>
+                            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="#" class="card-footer-item">Save</a>
+                            <a href="#" class="card-footer-item">Edit</a>
+                            <a href="#" class="card-footer-item">Delete</a>
+                        </footer>
+                    </div>
+                </div>
+                <div class="column">
+                    Third column
                 </div>
             </div>
         </div>
-    
     </div>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
